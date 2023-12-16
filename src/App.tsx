@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Header } from './components/Header/Header';
+import './App.scss';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Game } from './Pages/Game/Game';
+import { About } from './Pages/About/About';
+import { Navigation } from './components/Navigation/Navigation';
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <section className="app">
+      <Header />
 
-export default App;
+      <div className="app__container">
+        <Routes>
+          <Route path="game" element={<Navigate to="/" />} />
+          <Route index element={<Game />} />
+  
+          <Route path="about" element={<About />} />
+  
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+
+      <div className="app__navigation">
+        <Navigation />
+      </div>
+    </section>
+  );
+}; 

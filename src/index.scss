@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import '/src/styles/variables.scss';
+
+* {
+  color: $color-font--grey;
+}
+
+body {
+  margin: 0;
+  background-color: $color-main--white;
+  font-family: $font-squares;
+  height: 100vh;
+}
+
+code {
+
+}

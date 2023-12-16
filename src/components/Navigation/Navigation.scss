@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.navigation {
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgba($color: $color-font--grey, $alpha: .2);
+  box-shadow: 0 0 15px 1px rgba($color: #000, $alpha: .1);
+
+  @include tablet() {
+    width: 60%;
+  }
+
+  @include desktop() {
+    width: 40%;
+  }
+
+  &__border {
+    width: 5px;
+    height: 15px;
+    border-radius: 10px;
+
+    position: absolute;
+    left: 50%;
+
+    background-color: rgba($color: $color-font--grey, $alpha: .5);
+  }
+}
