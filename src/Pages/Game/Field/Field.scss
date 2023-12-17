@@ -1,0 +1,27 @@
+.field {
+    // position: relative;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__shell {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__coords {
+    position: relative;
+    top: 25px;
+    bottom: 0;
+  }
+
+  &__list {
+    padding: 0;
+    display: grid;
+    gap: 2px; 
+    width: 400px;
+    height: 400px;
+  }
+}

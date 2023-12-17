@@ -10,8 +10,8 @@
   justify-content: space-between;
   align-items: center;
 
-  background-color: rgba($color: $color-font--grey, $alpha: .2);
-  box-shadow: 0 0 15px 1px rgba($color: #000, $alpha: .1);
+  background-color: rgba($color: $color-font--grey, $alpha: .1);
+  box-shadow: 0 0 15px 1px rgba($color: #000, $alpha: .2);
 
   @include tablet() {
     width: 60%;

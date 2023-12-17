@@ -1,0 +1,17 @@
+.coords {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &--vertical {
+    height: 91%;
+    flex-direction: column;
+  }
+
+  &__item {
+    width: 30px;
+    margin: 0;
+    text-align: center;
+  }
+}

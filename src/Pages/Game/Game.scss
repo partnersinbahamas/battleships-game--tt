@@ -1,0 +1,11 @@
+@import '../../styles/mixins.scss';
+
+.game {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+
+  @include desktop() {
+    flex-direction: row;
+  }
+}

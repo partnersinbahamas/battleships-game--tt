@@ -3,15 +3,17 @@
 
 * {
   color: $color-font--grey;
+
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }
 
 body {
   margin: 0;
-  background-color: $color-main--white;
+  // background-color: $color-main--white;
   font-family: $font-squares;
   height: 100vh;
-}
-
-code {
-
 }

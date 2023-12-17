@@ -1,0 +1,17 @@
+@import '../../../../styles/variables.scss';
+
+.fieldTitle {
+  padding: 10px;
+  text-align: center;
+  letter-spacing: 5px;
+  color: #fff;
+  border-radius: 10px;
+
+  &-opponent {
+    background-color: $color-opponent-title--red;
+  }
+
+  &-you {
+    background-color: $color-you-title--blue;
+  }
+}

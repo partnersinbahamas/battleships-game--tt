@@ -1,0 +1,28 @@
+.square {
+  appearance: none;
+  margin: 0;
+  background-color: #fff;
+  border-radius: 3px;
+  transition: 1s;
+  background-position: center;
+
+  &-you {
+    background-color: #DEF3FF ;
+
+    &:checked {
+      background-image: url('../../images/bullet-red.png');
+      background-size: 23px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &-opponent {
+    background-color: #FFEBE9 ;
+
+    &:checked {
+      background-image: url('../../images/bullet-blue.png');
+      background-size: 23px;
+      background-repeat: no-repeat;
+    }
+  }
+}
