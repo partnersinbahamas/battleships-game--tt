@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/battleships-game--tt/static/css/main.b92893b6.css",
-    "main.js": "/battleships-game--tt/static/js/main.3e0544cb.js",
+    "main.css": "/battleships-game--tt/static/css/main.2aaef28e.css",
+    "main.js": "/battleships-game--tt/static/js/main.e1e1f7c1.js",
     "index.html": "/battleships-game--tt/index.html",
-    "main.b92893b6.css.map": "/battleships-game--tt/static/css/main.b92893b6.css.map",
-    "main.3e0544cb.js.map": "/battleships-game--tt/static/js/main.3e0544cb.js.map"
+    "main.2aaef28e.css.map": "/battleships-game--tt/static/css/main.2aaef28e.css.map",
+    "main.e1e1f7c1.js.map": "/battleships-game--tt/static/js/main.e1e1f7c1.js.map"
   },
   "entrypoints": [
-    "static/css/main.b92893b6.css",
-    "static/js/main.3e0544cb.js"
+    "static/css/main.2aaef28e.css",
+    "static/js/main.e1e1f7c1.js"
   ]
 }
