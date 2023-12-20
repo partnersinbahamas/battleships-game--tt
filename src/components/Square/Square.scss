@@ -2,7 +2,7 @@
   appearance: none;
   margin: 0;
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: 5px;
   transition: 1s;
   background-position: center;
 
@@ -11,7 +11,7 @@
 
     &:checked {
       background-image: url('../../images/bullet-red.png');
-      background-size: 23px;
+      background-size: 25px;
       background-repeat: no-repeat;
     }
   }
@@ -21,7 +21,7 @@
 
     &:checked {
       background-image: url('../../images/bullet-blue.png');
-      background-size: 23px;
+      background-size: 25px;
       background-repeat: no-repeat;
     }
   }

@@ -1,13 +1,14 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { ColumnType } from '../../types/squarePoint';
 import { createField } from '../../helpers/functions';
+import { Battlefield } from '../../classes/Battlefield';
 
 type Field = {
-  columns: ColumnType[];
+  battlefield: Battlefield;
 }
 
 const initialState: Field = {
-  columns: [],
+  battlefield: new Battlefield(),
 };
 
 export const yourFieldSlice = createSlice({
@@ -16,12 +17,20 @@ export const yourFieldSlice = createSlice({
   reducers: {
     init: (state: Field, actions: PayloadAction<number>) => {
       if (!localStorage.getItem('yourField')) {
-        state.columns = createField(actions.payload);
-        localStorage.setItem('yourField', JSON.stringify(state.columns))
+        state.battlefield = new Battlefield();
+        state.battlefield.createField(10);
+        state.battlefield.genereteShips();
+
+        localStorage.setItem('yourField', JSON.stringify(state.battlefield))
       } else {
-        state.columns = JSON.parse(localStorage.getItem('yourField')!);
+        state.battlefield = JSON.parse(localStorage.getItem('yourField')!);
       }
     },
+
+    // unpdate: (state: Field, actions:PayloadAction<ColumnType[]>) => {
+    //   state.battlefield = actions.payload;
+    //   localStorage.setItem('yourField', JSON.stringify(actions.payload))
+    // }
   }
 });
 

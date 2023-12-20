@@ -5,15 +5,17 @@ import { columnCoords } from "../../../helpers/variables";
 import './Field.scss';
 import { Coords } from "../../../components/Coords/Coords";
 import { FieldTitle } from "./FieldTitle/FieldTitle";
+import { ShipYard } from "../../../components/ShipYard/ShipYard";
+import { Battlefield } from "../../../classes/Battlefield";
 
 type Props = {
+  battlefield: Battlefield,
   columns: ColumnType[],
   size: number,
   isOpponent?: boolean,
 }
 
-export const Field: React.FC<Props> = ({ columns, size, isOpponent = false }) => {
-  
+export const Field: React.FC<Props> = ({ battlefield, columns, size, isOpponent = false }) => {
   return (
     <div className="field">
       <FieldTitle title={isOpponent ? 'Opponent fleet' : 'Your fleet'} isOpponent={isOpponent} />
@@ -27,7 +29,7 @@ export const Field: React.FC<Props> = ({ columns, size, isOpponent = false }) =>
           <Coords coords={Object.values(rowCoords)} />
 
           <ul
-            className="field__list"
+            className="field__list field__list-you"
             style={{
               gridTemplateColumns: `repeat(${size}, 1fr)`,
               gridTemplateRows: `repeat(${size}, 1fr)`
@@ -43,6 +45,8 @@ export const Field: React.FC<Props> = ({ columns, size, isOpponent = false }) =>
           </ul>
         </div>
       </div>
+
+      <ShipYard ships={battlefield.ships} />
     </div>
   )
 }

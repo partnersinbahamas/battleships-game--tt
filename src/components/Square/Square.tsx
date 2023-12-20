@@ -1,6 +1,8 @@
 import { SquarePoint } from "../../types/squarePoint";
 import classNames from "classnames";
 import './Square.scss';
+import { useEffect, useRef } from "react";
+import { Ship } from "../ShipYard/Ship/Ship";
 
 type Props = {
   square: SquarePoint,
@@ -8,15 +10,25 @@ type Props = {
 }
 
 export const Square: React.FC<Props> = ({ square, isOpponent }) => {
+  const ref = useRef(null);
+
   return (
-    <input
-      name={`${square.x}${square.y}`}
-      className={classNames(
-        "square",
-        {"square-you": !isOpponent},
-        {"square-opponent": isOpponent},
+    <>
+      {square.placed ? (
+        <div>placed</div>
+      ) : (
+        <input
+        ref={ref}
+        name={`${square.x}${square.y}`}
+        className={classNames(
+          "square",
+          {"square-you": !isOpponent},
+          {"square-opponent": isOpponent},
+        )}
+        type="checkbox"
+      />
       )}
-      type="checkbox"
-    />
+    </>
+
   )
 }
