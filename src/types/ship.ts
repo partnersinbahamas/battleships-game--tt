@@ -1,15 +1,14 @@
-// import { SquarePoint } from "./squarePoint";
-
-export type TowerType = {
-  id: number,
-  checked: boolean,
-}
 
 export type ShipType = {
   id: number,
   destroyed: boolean,
-  towers: TowerType[],
+  size: number,
+  direction: 'column' | 'row',
   name: string,
-  x: number | null,
-  y: string | null,
+  x: number,
+  y: number,
+  defX: number,
+  defY: number,
+  coordX: number | null,
+  coordY: number | null,
 }

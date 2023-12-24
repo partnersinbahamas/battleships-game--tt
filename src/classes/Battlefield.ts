@@ -1,5 +1,5 @@
 
-import { Ship } from "./Ship";
+import { Ship, ShipSerializable } from "./Ship";
 import { columnCoords } from "../helpers/variables";
 import { rowCoords } from "../helpers/variables";
 import { genereteUniqId } from "../helpers/functions";
@@ -24,12 +24,42 @@ import { isUnderPoint } from "../helpers/functions";
 //     name,
 //   })
 
-export class Battlefield {
-  ships: Ship[] = []
-  shots = [];
-  field = [];
+export interface BattlefieldSerializable {
+    ships: ShipSerializable[],
+    shots: any [],
+    field: any[],
+}
 
-  constructor() {}
+export class Battlefield {
+//   ships: Ship[] = []
+//   shots = [];
+//   field = [];
+
+  // _matrix: any = null;
+  // _changed: boolean = true;
+
+  constructor(
+    public ships: Ship[] = [],
+    public shots: any[] = [],
+    public field: any[] = []
+    // public createField: () => void,
+  ) {
+    Object.assign(this, { ships, shots, field });
+  }
+
+  toSerializableObject(): BattlefieldSerializable {
+    return {
+      ships: this.ships.map(ship => ship.toSerializableObject()), // вызываем метод сериализации для каждого корабля
+      shots: this.shots,
+      field: this.field,
+    };
+  }
+
+  static fromJSON(json: BattlefieldSerializable): Battlefield {
+    const { ships, shots, field } = json;
+    const shipsArray = ships.map(ship => new Ship(ship.size, ship.name, ship.id, ship.x, ship.y));
+    return new Battlefield(shipsArray, shots, field);
+}
 
   genereteShips() {
     for (const ship of ships) {

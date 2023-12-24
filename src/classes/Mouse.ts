@@ -38,7 +38,7 @@ export class Mouse {
 
     this.update(event);
 
-    console.log(this.x, this.y);
+    // console.log(this.x, this.y);
   };
 
   onMouseEnter = (event: React.MouseEvent) => {
@@ -48,7 +48,7 @@ export class Mouse {
 
 
 
-    console.log(this.x, this.y);
+    // console.log(this.x, this.y);
   };
 
   onMouseLeave = (event: React.MouseEvent) => {
@@ -57,7 +57,7 @@ export class Mouse {
     this.update(event);
     this.under = false;
 
-    console.log(this.x, this.y);
+    // console.log(this.x, this.y);
   };
 
   onMouseUp = (event: React.MouseEvent) => {
@@ -70,7 +70,7 @@ export class Mouse {
     }
   
 
-    console.log(this.left, this.prevLeft);
+    // console.log(this.left, this.prevLeft);
   };
 
   onMouseDown = (event: React.MouseEvent) => {
@@ -82,7 +82,7 @@ export class Mouse {
       this.left = true;
     }
 
-    console.log(this.left, this.prevLeft);
+    // console.log(this.left, this.prevLeft);
   };
 
   onMouseWheel = (event: React.WheelEvent) => {
@@ -92,7 +92,7 @@ export class Mouse {
 
     this.delta = event.deltaY > 0 ? 1 : -1;
 
-    console.log(this.delta);
+    // console.log(this.delta);
   };
 
 

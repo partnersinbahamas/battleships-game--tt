@@ -5,52 +5,11 @@ import { Game } from './Pages/Game/Game';
 import { About } from './Pages/About/About';
 import { Navigation } from './components/Navigation/Navigation';
 import { Mouse } from './classes/Mouse';
-import { useEffect } from 'react';
-import { Battlefield } from './classes/Battlefield';
-import { Ship } from './classes/Ship';
 
 export const App = () => {
-  const mouse = new Mouse(document.body);
-  const field = new Battlefield();
-
-  let druggedShip: Ship | null = null;
-
-  useEffect(() => {
-    let sq = field.createField(10);
-
-    console.log(sq);
-  })
-
-  const onShipMove = () => {
-    if (mouse.left && !mouse.prevLeft) {
-      const ship = field.field.find((el: Ship) => {
-        const div = document.getElementById(`#${el.name}-${el.id}`);
-
-        console.log(div);
-
-        return el.isUnder({x: mouse.x!, y: mouse.y!}, div!);
-      })
-
-      if (ship) {
-        druggedShip = ship;
-      }
-
-      if (mouse.left && druggedShip) {
-        const field = document.querySelector('.field__list-you')?.getBoundingClientRect();
-        druggedShip.x = mouse.x! - field?.top!;
-        druggedShip.y = mouse.y! - field?.left!
-      }
-    }
-  }
-
-  onShipMove();
 
   return (
-    <section className="app"
-      onMouseMove={(event) => mouse.onMouseMove(event)}
-      onMouseDown={(event) => mouse.onMouseDown(event)}
-      onMouseUp={(event) => mouse.onMouseUp(event)}
-    >
+    <section className="app">
       <Header />
 
       <div className="app__container">

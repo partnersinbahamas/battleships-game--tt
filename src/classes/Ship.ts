@@ -1,5 +1,14 @@
 import { isUnderPoint } from "../helpers/functions";
-import { TowerType } from "../types/ship";
+// import { TowerType } from "../types/ship";
+import { BattlefieldSerializable } from "./Battlefield";
+
+export interface ShipSerializable {
+    size: number,
+    name: string,
+    id: number,
+    x: number | null,
+    y: number | null,
+}
 
 export class Ship {
   destroyed = false;
@@ -19,6 +28,22 @@ export class Ship {
       x,
       y,
     })
+  }
+
+  static fromJSON(json: ShipSerializable): Ship {
+    const { size, name, id, x, y } = json;
+    // const shipsArray = ships.map(ship => new Ship(ship.size, ship.name, ship.id, ship.x, ship.y));
+    return new Ship(size, name, id, x, y);
+}
+
+  toSerializableObject(): ShipSerializable {
+    return {
+      size: this.size,
+      name: this.name,
+      id: this.id,
+      x: this.x,
+      y: this.y,
+    };
   }
 
   get placed() {

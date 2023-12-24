@@ -6,16 +6,17 @@ import './Field.scss';
 import { Coords } from "../../../components/Coords/Coords";
 import { FieldTitle } from "./FieldTitle/FieldTitle";
 import { ShipYard } from "../../../components/ShipYard/ShipYard";
-import { Battlefield } from "../../../classes/Battlefield";
+import { Battlefield, BattlefieldSerializable } from "../../../classes/Battlefield";
+import { Mouse } from "../../../classes/Mouse";
+import { BattlefieldType } from "../../../types/battlefield";
 
 type Props = {
-  battlefield: Battlefield,
-  columns: ColumnType[],
+  battlefield: BattlefieldType,
   size: number,
   isOpponent?: boolean,
 }
 
-export const Field: React.FC<Props> = ({ battlefield, columns, size, isOpponent = false }) => {
+export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false, }) => {
   return (
     <div className="field">
       <FieldTitle title={isOpponent ? 'Opponent fleet' : 'Your fleet'} isOpponent={isOpponent} />
@@ -35,18 +36,23 @@ export const Field: React.FC<Props> = ({ battlefield, columns, size, isOpponent 
               gridTemplateRows: `repeat(${size}, 1fr)`
             }}
           >
-            {columns.map((column: ColumnType) => {  
+            {battlefield.squares?.map((column: ColumnType) => {  
               return (
                 column.map((square: SquarePoint) => {
                   return <Square key={square.id} square={square} isOpponent={isOpponent} />
                 })
               )
             })}
+
+      <ShipYard ships={battlefield.ships} />
+
           </ul>
+
+
         </div>
       </div>
 
-      <ShipYard ships={battlefield.ships} />
+      {/* <ShipYard ships={battlefield.ships} /> */}
     </div>
   )
 }

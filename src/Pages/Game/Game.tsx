@@ -1,24 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import * as yourFieldActions from '../../Redux/features/yourField';
+import * as opponentFieldActions from '../../Redux/features/opponentField';
 import { Field } from './Field/Field';
 import './Game.scss';
-import { Battlefield } from '../../classes/Battlefield';
+import { Mouse } from '../../classes/Mouse';
+
+
 
 export const Game = () => {
   const size: number = 10;
 
   const dispatch = useAppDispatch();
-  const { battlefield } = useAppSelector(state => state.yourField);
+  const { yourBattlefield } = useAppSelector(state => state.yourField);
+  const { opponentBattlefield } = useAppSelector(state => state.opponentField);
+
 
   useEffect(() => {
     dispatch(yourFieldActions.init(size));
+    dispatch(opponentFieldActions.init(size));
   }, []);
 
   return (
     <section className="game">
-      <Field columns={battlefield.field} size={size} battlefield={battlefield} />
-      <Field columns={battlefield.field} size={size} isOpponent={true} battlefield={battlefield} />
+      <Field battlefield={yourBattlefield} size={size} />
+      <Field battlefield={opponentBattlefield} size={size} isOpponent={true} />
     </section>
   )
 }

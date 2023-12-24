@@ -13,11 +13,12 @@ export const Square: React.FC<Props> = ({ square, isOpponent }) => {
   const ref = useRef(null);
 
   return (
-    <>
-      {square.placed ? (
-        <div>placed</div>
-      ) : (
+    <div className="sq" data-x={square.x} data-y={square.y}>
+      {!square.free && (
+        <span>busy</span>
+      )}
         <input
+        onChange={() => {}}
         ref={ref}
         name={`${square.x}${square.y}`}
         className={classNames(
@@ -26,9 +27,8 @@ export const Square: React.FC<Props> = ({ square, isOpponent }) => {
           {"square-opponent": isOpponent},
         )}
         type="checkbox"
-      />
-      )}
-    </>
 
+      />
+    </div>
   )
 }

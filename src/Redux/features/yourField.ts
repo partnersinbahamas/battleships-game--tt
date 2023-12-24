@@ -1,14 +1,17 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { ColumnType } from '../../types/squarePoint';
 import { createField } from '../../helpers/functions';
-import { Battlefield } from '../../classes/Battlefield';
+import { BattlefieldType } from '../../types/battlefield';
 
 type Field = {
-  battlefield: Battlefield;
+  yourBattlefield: BattlefieldType;
 }
 
 const initialState: Field = {
-  battlefield: new Battlefield(),
+  yourBattlefield: {
+    ships: [],
+    shots: [],
+    squares: [],
+  },
 };
 
 export const yourFieldSlice = createSlice({
@@ -17,22 +20,20 @@ export const yourFieldSlice = createSlice({
   reducers: {
     init: (state: Field, actions: PayloadAction<number>) => {
       if (!localStorage.getItem('yourField')) {
-        state.battlefield = new Battlefield();
-        state.battlefield.createField(10);
-        state.battlefield.genereteShips();
-
-        localStorage.setItem('yourField', JSON.stringify(state.battlefield))
+        const battlefield = createField(actions.payload);
+        state.yourBattlefield = battlefield;
+        localStorage.setItem('yourField', JSON.stringify(battlefield))
       } else {
-        state.battlefield = JSON.parse(localStorage.getItem('yourField')!);
+        state.yourBattlefield = JSON.parse(localStorage.getItem('yourField')!);
       }
     },
 
-    // unpdate: (state: Field, actions:PayloadAction<ColumnType[]>) => {
-    //   state.battlefield = actions.payload;
-    //   localStorage.setItem('yourField', JSON.stringify(actions.payload))
-    // }
-  }
+    update: (state: Field, actions:PayloadAction<BattlefieldType>) => {
+      state.yourBattlefield = actions.payload;
+      localStorage.setItem('yourField', JSON.stringify(actions.payload))
+    }
+  },
 });
 
-export const { init } = yourFieldSlice.actions; 
+export const { init, update } = yourFieldSlice.actions; 
 export default yourFieldSlice.reducer;

@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import yourFieldReducer from '../Redux/features/yourField';
+import opponentReducer from '../Redux/features/opponentField';
 
 export const store = configureStore({
   reducer: {
     yourField: yourFieldReducer,
+    opponentField: opponentReducer,
   }
 });
 

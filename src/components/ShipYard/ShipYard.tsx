@@ -1,22 +1,19 @@
-import { ShipType } from "../../types/ship";
-import { allowedShips } from "../../helpers/variables";
-import { useState } from "react";
 import './ShipYard.scss';
-import { Ship as ship } from "../../classes/Ship";
+import { ShipType } from '../../types/ship';
 import { Ship } from "./Ship/Ship";
+import { Mouse } from "../../classes/Mouse";
 
 type Props = {
-  ships: ship[],
+  ships: ShipType[],
 }
 
 export const ShipYard: React.FC<Props> = ({ships}) => {
-//   const [ships, setShips] = useState<ShipType[]>(allowedShips);
 
   return (
     <section className="shipYard">
       <ul className="shipYard__list">
-        {ships.map((ship: ship) => (
-          <Ship  ship={ship} />
+        {ships.map((ship: ShipType) => (
+          <Ship  key={ship.id} ship={ship} />
         ))}
       </ul>
     </section>
