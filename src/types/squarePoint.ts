@@ -1,12 +1,13 @@
-import { Ship } from "../classes/Ship";
 import { ShipType } from "./ship";
 
+export type Coords = {
+  x:  number,
+  y: number,
+}
 export type ColumnType = SquarePoint[];
 
-export type SquarePoint = {
+export type SquarePoint = Coords & {
   id: number,
-  x: number,
-  y: number,
   ship: ShipType | null,
   free: boolean
 };

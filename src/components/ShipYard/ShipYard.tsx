@@ -1,14 +1,12 @@
-import './ShipYard.scss';
 import { ShipType } from '../../types/ship';
 import { Ship } from "./Ship/Ship";
-import { Mouse } from "../../classes/Mouse";
+import './ShipYard.scss';
 
 type Props = {
   ships: ShipType[],
 }
 
 export const ShipYard: React.FC<Props> = ({ships}) => {
-
   return (
     <section className="shipYard">
       <ul className="shipYard__list">

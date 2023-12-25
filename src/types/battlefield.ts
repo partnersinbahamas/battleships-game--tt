@@ -1,5 +1,5 @@
 import { ShipType } from "./ship";
-import { ColumnType, SquarePoint } from "./squarePoint";
+import { ColumnType } from "./squarePoint";
 
 export interface BattlefieldType {
   shots: any[],

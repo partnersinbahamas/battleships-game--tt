@@ -2,13 +2,11 @@ import { Square } from "../../../components/Square/Square";
 import { ColumnType, SquarePoint } from "../../../types/squarePoint";
 import { rowCoords } from "../../../helpers/variables";
 import { columnCoords } from "../../../helpers/variables";
-import './Field.scss';
 import { Coords } from "../../../components/Coords/Coords";
 import { FieldTitle } from "./FieldTitle/FieldTitle";
 import { ShipYard } from "../../../components/ShipYard/ShipYard";
-import { Battlefield, BattlefieldSerializable } from "../../../classes/Battlefield";
-import { Mouse } from "../../../classes/Mouse";
 import { BattlefieldType } from "../../../types/battlefield";
+import './Field.scss';
 
 type Props = {
   battlefield: BattlefieldType,
@@ -44,15 +42,10 @@ export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false, 
               )
             })}
 
-      <ShipYard ships={battlefield.ships} />
-
+            <ShipYard ships={battlefield.ships} />
           </ul>
-
-
         </div>
       </div>
-
-      {/* <ShipYard ships={battlefield.ships} /> */}
     </div>
   )
 }

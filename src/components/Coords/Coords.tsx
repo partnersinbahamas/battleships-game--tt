@@ -14,7 +14,12 @@ export const Coords: React.FC<Props> = ({ coords }) => {
       )}
     >
       {coords.map((coord) => (
-        <div key={coord} className="coords__item">{coord}</div>
+        <li
+          key={coord}
+          className="coords__item"
+        >
+          {typeof coord === 'number' ? coord + 1: coord}
+        </li>
       ))}
     </ul>
   )

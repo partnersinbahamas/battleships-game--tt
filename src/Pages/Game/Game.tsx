@@ -4,9 +4,6 @@ import * as yourFieldActions from '../../Redux/features/yourField';
 import * as opponentFieldActions from '../../Redux/features/opponentField';
 import { Field } from './Field/Field';
 import './Game.scss';
-import { Mouse } from '../../classes/Mouse';
-
-
 
 export const Game = () => {
   const size: number = 10;
@@ -15,7 +12,6 @@ export const Game = () => {
   const { yourBattlefield } = useAppSelector(state => state.yourField);
   const { opponentBattlefield } = useAppSelector(state => state.opponentField);
 
-
   useEffect(() => {
     dispatch(yourFieldActions.init(size));
     dispatch(opponentFieldActions.init(size));
@@ -23,8 +19,16 @@ export const Game = () => {
 
   return (
     <section className="game">
-      <Field battlefield={yourBattlefield} size={size} />
-      <Field battlefield={opponentBattlefield} size={size} isOpponent={true} />
+      <Field
+        battlefield={yourBattlefield}
+        size={size}
+      />
+
+      <Field
+        battlefield={opponentBattlefield}
+        size={size}
+        isOpponent={true}
+      />
     </section>
   )
 }

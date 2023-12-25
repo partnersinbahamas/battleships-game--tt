@@ -1,35 +1,24 @@
 .ship {
-    position: absolute;
-    width: min-content;
+  position: absolute;
+  width: min-content;
+  background-color: #ddd;
+  border-radius: 10px;
 
-      &__list {
-        display: flex;
-        list-style: none;
-    }
+  &__list {
+    display: flex;
+    list-style: none;
+  }
 
-    &-smooth {
-      transition: .3s;
-    }
+  &-smooth {
+    transition: .3s;
+  }
 
   &__tower {
-    background-color: #ddd;
+    background-color: transparent;
     
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &:first-child {
-      border-radius: 10px 0 0 10px;
-    }
-
-    &:last-child {
-      position: relative;
-      left: -16px;
-
-      transform: rotate((130deg));
-
-      border-radius: 20px 50px 50px 50px;
-    }
 
     &_indicator {
       width: 35%;
