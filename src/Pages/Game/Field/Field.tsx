@@ -14,7 +14,7 @@ type Props = {
   isOpponent?: boolean,
 }
 
-export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false, }) => {
+export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false }) => {
   return (
     <div className="field">
       <FieldTitle title={isOpponent ? 'Opponent fleet' : 'Your fleet'} isOpponent={isOpponent} />
@@ -28,7 +28,8 @@ export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false, 
           <Coords coords={Object.values(rowCoords)} />
 
           <ul
-            className="field__list field__list-you"
+            className="field__list"
+            data-field={isOpponent ? 'opponent' : 'you'}
             style={{
               gridTemplateColumns: `repeat(${size}, 1fr)`,
               gridTemplateRows: `repeat(${size}, 1fr)`
@@ -36,13 +37,17 @@ export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false, 
           >
             {battlefield.squares?.map((column: ColumnType) => {  
               return (
-                column.map((square: SquarePoint) => {
-                  return <Square key={square.id} square={square} isOpponent={isOpponent} />
-                })
+                column.map((square: SquarePoint) => (
+                  <Square
+                    key={square.id}
+                    square={square}
+                    isOpponent={isOpponent}
+                  />
+                ))
               )
             })}
 
-            <ShipYard ships={battlefield.ships} />
+            <ShipYard ships={battlefield.ships} isOpponent={isOpponent} />
           </ul>
         </div>
       </div>

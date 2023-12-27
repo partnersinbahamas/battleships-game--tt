@@ -1,3 +1,5 @@
+@import '../../../styles/mixins.scss';
+
 .field {
   display: flex;
   flex-direction: column;
@@ -22,11 +24,21 @@
   }
 
   &__list {
-  position: relative;
+    position: relative;
     padding: 0;
     display: grid;
     gap: 2px; 
-    width: 380px;
-    height: 380px;
+    width: 320px;
+    height: 320px;
+
+    @include tablet() {
+      width: 340px;
+      height: 340px;
+    }
+
+    @include desktop() {
+      width: 380px;
+      height: 380px;  
+    }
   }
 }

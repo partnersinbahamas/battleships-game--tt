@@ -1,32 +1,27 @@
 import { SquarePoint } from "../../types/squarePoint";
 import classNames from "classnames";
+import React from "react";
 import './Square.scss';
 
 type Props = {
-  square: SquarePoint,
-  isOpponent: boolean
-}
+  square: SquarePoint;
+  isOpponent: boolean;
+};
 
 export const Square: React.FC<Props> = ({ square, isOpponent }) => {
-  return (
-    <div className="sq" data-x={square.x} data-y={square.y}>
-      {!square.free && !square.ship && (
-        <span>busy</span>
-      )}
 
-      {square.ship && (
-        <span>ship</span>
+  return (
+    <div
+      data-square={isOpponent ? 'opponent' : 'you'}
+      className={classNames(
+        "square",
+        {"square-you": !isOpponent},
+        {"square-you_busy": !square.free && !isOpponent},
+        {"square-opponent": isOpponent},
+        {"square-opponent_busy": isOpponent && !square.free},
       )}
-        <input
-        onChange={() => {}}
-        name={`${square.x}${square.y}`}
-        className={classNames(
-          "square",
-          {"square-you": !isOpponent},
-          {"square-opponent": isOpponent},
-        )}
-        type="checkbox"
-      />
-    </div>
+      data-x={square.x}
+      data-y={square.y}
+    />
   )
-}
+};

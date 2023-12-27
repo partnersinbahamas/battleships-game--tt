@@ -1,4 +1,8 @@
 .shipYard {
+  height: 100px;
+  position: absolute;
+  // top: -30px;
+  top: 0;
   &__list {
     max-width: 400px;
     display: flex;

@@ -1,24 +1,25 @@
 @import './styles/mixins.scss';
 
 .app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
   &__container {
     position: relative;
-    // height: calc(100vh - 72px - (30px + 20px));
+    height: calc(100vh - 72px - (30px + 20px));
 
     @include tablet() {
-      height: calc(100vh - 81px - (30px + 20px));
+      height: calc(100vh - 51px - (30px + 20px));
     }
   
     @include desktop() {
-      height: calc(100vh - 87px - (30px + 20px));
+      height: calc(100vh - 200px - (30px + 20px));
     }
+    height: 100%;
 
     display: flex;
     justify-content: center;
-    // align-items: center;
-  }
-
-  &__navigation {
-    padding-bottom: 20px;
+    align-items: center;
   }
 }

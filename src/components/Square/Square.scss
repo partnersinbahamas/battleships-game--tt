@@ -1,15 +1,20 @@
+@import '../../styles/variables.scss';
+
 .square {
   appearance: none;
   margin: 0;
   background-color: #fff;
-  border-radius: 5px;
   transition: 1s;
   background-position: center;
 
   &-you {
-    background-color: #DEF3FF ;
+    background-color: $color-square-you;
 
-    &:checked {
+    &_busy {
+      background-color: $color-square_you-busy;
+    }
+
+    &_checked {
       background-image: url('../../images/bullet-red.png');
       background-size: 25px;
       background-repeat: no-repeat;
@@ -17,16 +22,18 @@
   }
 
   &-opponent {
-    background-color: #FFEBE9 ;
+    background-color: $color-square-opponent;
 
-    &:checked {
-      background-image: url('../../images/bullet-blue.png');
-      background-size: 25px;
-      background-repeat: no-repeat;
+    &_busy {
+      background-color: $color-square_opponent-busy;
+    }
+
+    &_checked {
+      &:checked {
+        background-image: url('../../images/bullet-blue.png');
+        background-size: 25px;
+        background-repeat: no-repeat;
+      }
     }
   }
-}
-
-.sq {
-  background-color: #DEF3FF ;
 }

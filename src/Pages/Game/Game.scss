@@ -3,7 +3,8 @@
 .game {
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  align-items: center;
+  gap: 60px;
 
   @include desktop() {
     flex-direction: row;
