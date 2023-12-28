@@ -1,0 +1,42 @@
+.select {
+    position: relative;
+    background-color: #F3F3F3;
+    box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: .1);
+    border-radius: 5px;
+
+  &__selected {
+    margin: 0;
+    padding: 10px 30px;
+
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+
+  &__list {
+    max-height: 100px;
+    overflow: scroll;
+    list-style: none;
+    position: absolute;
+    bottom: -105px;
+    left: 0;
+    right: 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+
+    &::-webkit-scrollbar {
+        display: none;
+      }
+  }
+
+  &__item {
+    width: min-content;
+    padding: 5px 30px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}

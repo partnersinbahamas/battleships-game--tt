@@ -18,6 +18,8 @@ export const App = () => {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
+
+      {/* <Navigation /> */}
     </section>
   );
 }; 

@@ -1,6 +1,6 @@
 import { Square } from "../components/Square/Square";
 import { BattlefieldType } from "../types/battlefield";
-import { ShipType } from "../types/ship";
+import { ShipTower, ShipType } from "../types/ship";
 import { ColumnType, Coords, SquarePoint } from "../types/squarePoint";
 import { columnCoords } from "./variables";
 import { ships } from "./variables";
@@ -69,7 +69,9 @@ export function createField(size: number): BattlefieldType {
         x: columnCoords[i],
         y: columnCoords[k],
         ship: null,
+        belong: null,
         free: true,
+        isChecked: false,
       };
 
       field.squares[i - 1][k - 1] = newPoint;
@@ -85,8 +87,6 @@ export function isEachTowerInField(shipProp: ShipType, field: Element, isOpponen
   for (let i = shipProp.size; i > 0; i--) {
     const {left, top} = document.getElementById(`ship-${shipProp.id}-tower-${i}-${isOpponent ? 'opponent' : 'you'}`)!
       .getBoundingClientRect();
-
-      // console.log(document.getElementById(`ship-${shipProp.id}-tower-${i}-opponent`)!)
 
     if (!isUnderPoint({x: left + 10, y: top + 10}, field)) {
       return false;
@@ -118,7 +118,7 @@ export const onPlaceShip = (ships: ShipType[]): ColumnType[] => {
       for (let j = coordY! - 1; j < coordY! + ship.size * dx + dy + 1; j++) {
         for (let k = coordX! - 1; k < coordX! + ship.size * dy + dx + 1; k++) {
           if (inField(j, k)) {
-            field[k][j] = {...field[k][j], free: false, ship};
+            field[k][j] = {...field[k][j], free: false, belong: ship};
           }
         }
       }
@@ -127,6 +127,33 @@ export const onPlaceShip = (ships: ShipType[]): ColumnType[] => {
 
   return field;
 };
+
+export const setTowerCoords = (squares: ColumnType[], ship: ShipType, point: Coords) => {
+  const newTowers = [];
+  const dy: number = ship.direction === 'row' ? 1 : 0;
+  const dx: number = ship.direction === 'column' ? 1 : 0;
+
+    for (let i = 0; i < squares.length; i++) {
+      const column = squares[i];
+
+      for (let k = 0; k < column.length; k++) {
+        const cell = column[k];
+
+        for (let i = 0; i < ship.size; i++) {
+          if (cell.x === point.x! + dx * i && cell.y === point.y! + dy * i) {
+            const newTower = {
+              ...ship.towers[i],
+              square: cell,
+            }
+
+            newTowers.push(newTower);
+          } 
+        }
+      }
+    }
+
+    return newTowers;
+}
 
 export const isCoordFree = (squares: ColumnType[], ship: ShipType, x: number, y: number) => {
   if (!inField(x, y)) {
@@ -146,7 +173,7 @@ export const isCoordFree = (squares: ColumnType[], ship: ShipType, x: number, y:
 
     const item = squares[cx][cy];
 
-    if (!item.free) {
+    if (item.belong && item.belong?.id !== ship.id) { //!item.free
       return false;
     }
   }
@@ -191,12 +218,12 @@ export function randomShipPlace(squares: ColumnType[], ship: ShipType, rootEleme
   let isFree = false;
 
   const cells = document.querySelectorAll(`[data-square="${isOpponent ? 'opponent' : 'you'}"]`);
-  console.log(cells);
   let cell: any = null;
 
   while(!isFree) {
     x = getRandomBetween(0, 9);
     y = getRandomBetween(0, 9);
+    let newTowers: ShipTower[] = []
 
 
     cell = Array.from(cells).find((cell: any) => {
@@ -218,12 +245,18 @@ export function randomShipPlace(squares: ColumnType[], ship: ShipType, rootEleme
       newX = cellReact.left - rootRect.left;
       newY = cellReact.top - rootRect.top;
 
+      const coordsPoint = {
+        x: pointX!,
+        y: pointY!,
+      }
+
       preparatedShip = { ...ship,
         x: newX,
         y: newY,
         coordX: pointX,
         coordY: pointY,
         direction,
+        towers: setTowerCoords(squares, preparatedShip, coordsPoint),
       };
 
       isFree = isCoordFree(squares, preparatedShip, pointX, pointY); 

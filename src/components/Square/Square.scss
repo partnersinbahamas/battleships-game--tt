@@ -16,24 +16,25 @@
 
     &_checked {
       background-image: url('../../images/bullet-red.png');
+
       background-size: 25px;
       background-repeat: no-repeat;
     }
   }
 
+  &-boombed {
+    background-image: url('../../images/boom.png');
+    background-size: 25px;
+    background-repeat: no-repeat;
+  }
+
   &-opponent {
     background-color: $color-square-opponent;
 
-    &_busy {
-      background-color: $color-square_opponent-busy;
-    }
-
     &_checked {
-      &:checked {
-        background-image: url('../../images/bullet-blue.png');
-        background-size: 25px;
-        background-repeat: no-repeat;
-      }
+      background-image: url('../../images/bullet-blue.png');
+      background-size: 25px;
+      background-repeat: no-repeat;
     }
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ShipType } from '../../../types/ship';
-import { isCoordFree, isUnderPoint, onPlaceShip } from '../../../helpers/functions';
+import { ShipTower, ShipType } from '../../../types/ship';
+import { isCoordFree, isUnderPoint, onPlaceShip, setTowerCoords } from '../../../helpers/functions';
 import { useAppDispatch } from '../../../Redux/hooks';
 import { useAppSelector } from '../../../Redux/hooks';
 import * as yourFieldActions from '../../../Redux/features/yourField';
@@ -22,19 +22,18 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
   const rootRect: DOMRect = yourfield?.getBoundingClientRect()!;
   const squareEl = document.querySelector('.square');
   const squareRect = squareEl?.getBoundingClientRect();
-  // console.log(squareEl);
 
-  const towers: number[] = [];
   const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  console.log(squareEl, squareRect);
 
   const dispatch = useAppDispatch();
   const { yourBattlefield: field } = useAppSelector(state => state.yourField);
-
-  for (let i = 0; i < ship.size; i++) {
-    towers.push(i + 1);
-  }
-
   const handleMouseDown = (e: React.MouseEvent): void => {
+    // if (isOpponent) {
+    //   return;
+    // }
+
     setIsDragging(true);
     
     offsetRef.current = {
@@ -52,6 +51,10 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
   };
 
   const handleMouseUp = () => {
+    // if (isOpponent) {
+    //   return;
+    // }
+  
     setIsDragging(false);
 
     const copyShips = [...field.ships].map((shipItem) => {
@@ -62,6 +65,8 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
         let newX: number = shipItem.defX;
         let newY: number = shipItem.defY;
 
+        let newTowers: ShipTower[] = [...shipItem.towers];
+
         const { left, top } = shipRef.current?.getBoundingClientRect()!;
 
         const point: Coords = {
@@ -71,6 +76,7 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
   
         const cells = document.querySelectorAll('.square');
         const cell: any = Array.from(cells).find((cell) => isUnderPoint(point, cell));
+
 
         if (cell) {
           const { x, y } = cell.dataset;
@@ -83,16 +89,28 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
           
           newX = isFree ? cellReact.left - rootRect.left : shipItem.defX;
           newY = isFree ? cellReact.top - rootRect.top : shipItem.defY;
+    
+          if (isFree) {
+            const coordsPoint = {
+              x: pointX!,
+              y: pointY!,
+            }
+            newTowers = setTowerCoords(field.squares, shipItem, coordsPoint);
+          }
         }
 
         setCoords({x: newX, y: newY});
+        console.log(newTowers)
 
         shipItem = { ...shipItem,
           x: newX,
           y: newY,
           coordX: pointX,
           coordY: pointY,
+          towers: newTowers,
         };
+
+        console.log(shipItem);
       }
 
       return shipItem;
@@ -151,35 +169,43 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
     };
   }, [isDragging]);
 
+  console.log(isDragging);
+
   return (
     <li
       ref={shipRef}
       className={classNames(
         "ship",
         {"ship-smooth": !isDragging},
+        {"ship-destroyed": ship.destroyed},
       )}
       style={{
         left: `${coords.x}px`,
         top: `${coords.y}px`,
       }}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onWheel={onWheel}
     >
       <ul
         className="ship__list"
         style={{
           flexDirection: ship.direction,
         }}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onWheel={onWheel}
       >
-        {towers.map((tower) => (
+        {ship.towers.map((tower) => (
           <li
             id={`ship-${ship.id}-tower-${tower}-${isOpponent ? 'opponent' : 'you'}`}
-            key={tower}
+            key={tower.id}
             className={`ship__tower ship_tower-${ship.id}`}
             style={{ width: `${squareRect?.width}px`, height: `${squareRect?.width}px` }}
           >
-            <div className="ship__tower_indicator"/>
+            <div
+              className={classNames(
+                "ship__tower_indicator",
+                {"ship__tower_indicator-destroyed": tower.isChecked},
+              )}
+            />
           </li>
         ))}
       </ul>

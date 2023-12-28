@@ -1,0 +1,27 @@
+.fireButton {
+  &__button {
+    position: relative;
+    border: 0;
+    background-color: transparent;
+    text-align: center;
+    background-image: url('../../../images/logo.png');
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 60px;
+    height: 30px;
+  }
+
+  &__fire {
+    width: 20%;
+    height: 2px;
+    background-color: #17E006;
+    transition: .3s;
+      
+    &-active {
+      width: 100%;
+      background-color: red;
+    }
+  }
+}

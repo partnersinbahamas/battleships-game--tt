@@ -1,11 +1,11 @@
 import { ShipType } from '../../types/ship';
+import { YardTitle } from '../YardTitle/YardTitle';
 import { Ship } from "./Ship/Ship";
 import './ShipYard.scss';
 
 type Props = {
   ships: ShipType[],
   isOpponent: boolean,
-
 }
 
 export const ShipYard: React.FC<Props> = ({ ships, isOpponent }) => {

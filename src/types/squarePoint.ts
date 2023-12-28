@@ -9,5 +9,7 @@ export type ColumnType = SquarePoint[];
 export type SquarePoint = Coords & {
   id: number,
   ship: ShipType | null,
-  free: boolean
+  belong: ShipType | null,
+  free: boolean,
+  isChecked: boolean
 };

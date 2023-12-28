@@ -1,0 +1,10 @@
+.selectCoords {
+  display: flex;
+  gap: 10px;
+
+  &__shell {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}

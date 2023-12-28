@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../Redux/hooks';
-import { onPlaceShip, randomShipPlace } from '../../helpers/functions';
+import { createField, onPlaceShip, randomShipPlace } from '../../helpers/functions';
 import { BattlefieldType } from '../../types/battlefield';
 import { ShipType } from '../../types/ship';
 import { useAppSelector } from '../../Redux/hooks';
@@ -23,7 +23,7 @@ export const Controls = () => {
       field: Element,
       isOpponent: boolean
     ) {
-      let copyShips: ShipType[] = [...dispatchField.ships];
+      let copyShips: ShipType[] = createField(10).ships;
   
       for (let i = 0; i < copyShips.length; i++) {
         const ship = copyShips[i];

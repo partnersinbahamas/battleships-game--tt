@@ -14,6 +14,10 @@ export const navigations: Nav[] = [
   },
 ];
 
+export type Coordinates = {
+  [key: number]: string | number
+}
+
 export const rowCoords: { [key: number]: string } = {
   1: 'A',
   2: 'B',
@@ -53,6 +57,12 @@ export const ships: ShipType[] = [
     name: 'Destroyer',
     direction: 'row',
     destroyed: false,
+    towers: [
+      {id: 1, isChecked: false, square: null},
+      {id: 2, isChecked: false, square: null},
+      {id: 3, isChecked: false, square: null},
+      {id: 4, isChecked: false, square: null},
+    ],
   },
 
   {
@@ -67,6 +77,11 @@ export const ships: ShipType[] = [
     name: 'Submarine',
     direction: 'row',
     destroyed: false,
+    towers: [
+      {id: 1, isChecked: false, square: null},
+      {id: 2, isChecked: false, square: null},
+      {id: 3, isChecked: false, square: null}
+    ],
   },
 
   {
@@ -81,6 +96,10 @@ export const ships: ShipType[] = [
     name: 'Cruiser',
     direction: 'row',
     destroyed: false,
+    towers: [
+      {id: 1, isChecked: false, square: null},
+      {id: 2, isChecked: false, square: null},
+    ],
   },
 
   {
@@ -95,6 +114,13 @@ export const ships: ShipType[] = [
     name: 'Battleship',
     direction: 'row',
     destroyed: false,
+    towers: [
+      {id: 1, isChecked: false, square: null},
+      {id: 2, isChecked: false, square: null},
+      {id: 3, isChecked: false, square: null},
+      {id: 4, isChecked: false, square: null},
+      {id: 5, isChecked: false, square: null},
+    ],
   },
 
   {
@@ -109,5 +135,11 @@ export const ships: ShipType[] = [
     name: 'Destroyer',
     direction: 'row',
     destroyed: false,
+    towers: [
+      {id: 1, isChecked: false, square: null},
+      {id: 2, isChecked: false, square: null},
+      {id: 3, isChecked: false, square: null},
+      {id: 4, isChecked: false, square: null},
+    ],
   },
 ]

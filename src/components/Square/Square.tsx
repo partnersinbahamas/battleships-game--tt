@@ -17,11 +17,14 @@ export const Square: React.FC<Props> = ({ square, isOpponent }) => {
         "square",
         {"square-you": !isOpponent},
         {"square-you_busy": !square.free && !isOpponent},
+        {"square-you_checked": !isOpponent && square.isChecked && !square.ship},
         {"square-opponent": isOpponent},
-        {"square-opponent_busy": isOpponent && !square.free},
+        {"square-opponent_checked": isOpponent && square.isChecked && !square.ship},
+        {"square-boombed": square.isChecked && square.ship},
       )}
       data-x={square.x}
       data-y={square.y}
-    />
+    >
+    </div>
   )
 };

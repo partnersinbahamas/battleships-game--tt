@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.graveYard {
+    font-size: 12px;
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__list {
+    max-width: 300px;
+    list-style: none;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  &__item {
+    font-family: $font-popins, sans-serif;
+    font-size: 14px;
+
+    &-destroyed {
+      text-decoration: line-through;
+      color: $color-red;
+    }
+  }
+}
