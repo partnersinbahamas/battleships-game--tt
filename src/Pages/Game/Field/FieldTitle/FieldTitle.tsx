@@ -18,5 +18,5 @@ export const FieldTitle: React.FC<Props> = ({ title, isOpponent }) => {
     >
       {title}
     </h1>
-  )
-}
+  );
+};

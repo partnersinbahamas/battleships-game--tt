@@ -7,5 +7,5 @@ type Props = {
 export const YardTitle: React.FC<Props> = ({title}) => {
   return (
     <h1 className="yardTitle">{title}</h1>
-  )
-}
+  );
+};

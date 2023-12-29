@@ -22,5 +22,5 @@ export const Coords: React.FC<Props> = ({ coords }) => {
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};

@@ -24,7 +24,6 @@ export const Square: React.FC<Props> = ({ square, isOpponent }) => {
       )}
       data-x={square.x}
       data-y={square.y}
-    >
-    </div>
-  )
+    />
+  );
 };

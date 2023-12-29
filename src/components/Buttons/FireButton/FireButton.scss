@@ -1,27 +1,48 @@
+@import '../../../styles/variables.scss';
+
 .fireButton {
   &__button {
-    position: relative;
-    border: 0;
+    width: 60px;
+    height: 30px;
     background-color: transparent;
     text-align: center;
+    border: 0;
+
+    position: relative;
     background-image: url('../../../images/logo.png');
     background-size: 15px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    width: 60px;
-    height: 30px;
   }
 
   &__fire {
+    position: relative;
     width: 20%;
     height: 2px;
-    background-color: #17E006;
+    background-color: $color-green;
     transition: .3s;
-      
+
     &-active {
       width: 100%;
-      background-color: red;
+      background-color: $color-red;
     }
   }
-}
+
+  &__shot {
+    width: 10px;
+    height: 10px;
+    background-image: url('../../../images/boom.png');
+    background-size: 8px;
+    background-repeat: no-repeat;
+    transition: .3s;
+
+    position: absolute;
+    right: -5px;
+    top: -3px;
+
+    &--scale {
+      transform: scale(2);
+    }
+  }
+};

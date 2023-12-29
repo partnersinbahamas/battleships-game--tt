@@ -2,7 +2,6 @@ import { Header } from './components/Header/Header';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Game } from './Pages/Game/Game';
 import { About } from './Pages/About/About';
-import { Navigation } from './components/Navigation/Navigation';
 import './App.scss';
 
 export const App = () => {

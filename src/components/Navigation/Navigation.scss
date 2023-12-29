@@ -3,8 +3,8 @@
 
 .navigation {
   width: 80%;
-  margin: 0 auto;
   border-radius: 10px;
+  margin: 0 auto;
 
   display: flex;
   justify-content: space-between;
@@ -26,9 +26,6 @@
     height: 15px;
     border-radius: 10px;
 
-    // position: absolute;
-    // left: 50%;
-
     background-color: rgba($color: $color-font--grey, $alpha: .5);
-  }
-}
+  };
+};

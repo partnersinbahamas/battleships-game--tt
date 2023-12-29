@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .square {
   appearance: none;
@@ -16,16 +17,31 @@
 
     &_checked {
       background-image: url('../../images/bullet-red.png');
-
-      background-size: 25px;
       background-repeat: no-repeat;
+      background-size: 15px;
+
+      @include tablet() {
+        background-size: 20px;
+      }
+
+      @include desktop() {
+        background-size: 25px;
+      }
     }
   }
 
   &-boombed {
     background-image: url('../../images/boom.png');
-    background-size: 25px;
     background-repeat: no-repeat;
+    background-size: 15px;
+
+    @include tablet() {
+      background-size: 20px;
+    }
+
+    @include desktop() {
+      background-size: 25px;
+    }
   }
 
   &-opponent {
@@ -33,8 +49,16 @@
 
     &_checked {
       background-image: url('../../images/bullet-blue.png');
-      background-size: 25px;
       background-repeat: no-repeat;
+      background-size: 15px;
+
+      @include tablet() {
+        background-size: 20px;
+      }
+
+      @include desktop() {
+        background-size: 25px;
+      }
     }
   }
-}
+};

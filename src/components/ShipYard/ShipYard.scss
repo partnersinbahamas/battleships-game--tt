@@ -1,9 +1,10 @@
 .shipYard {
   height: 100px;
-  position: absolute;
-  top: 0;
   display: flex;
   z-index: 1;
+
+  position: absolute;
+  top: 0;
 
   &__title {
     position: absolute;
@@ -18,4 +19,4 @@
     gap: 10px;
     list-style: none;
   }
-}
+};

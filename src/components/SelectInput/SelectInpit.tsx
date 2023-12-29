@@ -1,6 +1,6 @@
 import { useState } from "react";
-import './SelectInput.scss';
 import { rowCoords } from "../../helpers/variables";
+import './SelectInput.scss';
 
 type Props = {
   coords: number[],
@@ -15,7 +15,7 @@ export const SelectInput: React.FC<Props> = ({coords, onSelect, isString = true}
   const visibleCoords = coords.filter((coord: number) => !isString
     ? coord + 1 !== selectedCoord
     : coord !== selectedCoord
-)
+  )
 
   const onClickHandle = (coord: number) => {
     setIsOpen(false);
@@ -32,18 +32,19 @@ export const SelectInput: React.FC<Props> = ({coords, onSelect, isString = true}
         { !isString ? selectedCoord : rowCoords[selectedCoord + 1] }
       </p>
 
-        {isOpen && (
-          <ul className="select__list">
-            {visibleCoords.map((coord: any) => (
-              <li
-                className="select__item" 
-                onClick={() => onClickHandle(coord)}
-              >
-                {!isString ? coord + 1 : rowCoords[coord  + 1]}
-              </li>
-            ))}
-          </ul>
-        )}
+      {isOpen && (
+        <ul className="select__list">
+          {visibleCoords.map((coord: any) => (
+            <li
+              key={coord}
+              className="select__item" 
+              onClick={() => onClickHandle(coord)}
+            >
+              {!isString ? coord + 1 : rowCoords[coord  + 1]}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
-  )
-}
+  );
+};

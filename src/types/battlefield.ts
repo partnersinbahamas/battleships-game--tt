@@ -5,4 +5,4 @@ export interface BattlefieldType {
   shots: any[],
   ships: ShipType[],
   squares: ColumnType[],
-}
+};

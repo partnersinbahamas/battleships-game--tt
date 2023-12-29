@@ -1,0 +1,78 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.turn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+
+  &--right {
+    position: absolute;
+    left: -40px;
+
+    transform: rotate(-90deg) translateX(-440%);
+
+    @include tablet() {
+      transform: rotate(-90deg) translateX(-350%);
+      left: -60px;
+    }
+
+    @include desktop() {
+      position: static;
+      left: 0;
+      transform: rotate(0) translateX(330%);
+    }
+  }
+
+  &--left {
+    position: absolute;
+    left: -40px;
+    transform: rotate(-90deg) translateX(440%);
+
+    @include tablet() {
+      transform: rotate(-90deg) translateX(350%);
+      left: -60px;
+    }
+
+    @include desktop() {
+      position: static;
+      left: 0;
+      transform: rotate(0) translateX(-330%);
+    }
+  }
+
+  &__title {
+    letter-spacing: 2px;
+    font-size: 12px;
+
+    @include tablet() {
+      letter-spacing: 3px;
+      font-size: 14px;
+    }
+
+    @include tablet() {
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+  }
+
+  &__arrow {
+    font-size: 8px;
+    padding: 2px 30px;
+    background-color: $color-font--grey;
+    color: #fff;
+    border-radius: 10px;
+
+    @include tablet() {
+      padding: 2px 40px;
+      font-size: 12px;
+    }
+
+    @include tablet() {
+      padding: 2px 45px;
+      font-size: 14px;
+    }
+  }
+};

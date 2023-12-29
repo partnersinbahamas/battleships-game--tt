@@ -1,12 +1,11 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .graveYard {
-    font-size: 12px;
   &__container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
   }
 
   &__list {
@@ -20,11 +19,19 @@
 
   &__item {
     font-family: $font-popins, sans-serif;
-    font-size: 14px;
+    font-size: 10px;
+
+    @include tablet() {
+      font-size: 12px;
+    }
+
+    @include desktop() {
+      font-size: 14px;
+    }
 
     &-destroyed {
       text-decoration: line-through;
       color: $color-red;
     }
   }
-}
+};

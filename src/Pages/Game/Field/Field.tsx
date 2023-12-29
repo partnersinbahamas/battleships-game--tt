@@ -5,64 +5,91 @@ import { columnCoords } from "../../../helpers/variables";
 import { FieldTitle } from "./FieldTitle/FieldTitle";
 import { ShipYard } from "../../../components/ShipYard/ShipYard";
 import { BattlefieldType } from "../../../types/battlefield";
-import './Field.scss';
 import { SelectCoords } from "../../../components/SelectCoords/SelectCoords";
-import { isShipPlaced } from "../../../helpers/functions";
+import { getRandomBetween, isShipPlaced, isSquareChecked } from "../../../helpers/functions";
 import { FireButton } from "../../../components/Buttons/FireButton/FireButton";
 import { Coords } from "../../../components/Coords/Coords";
 import { GraveYard } from "../../../components/GraveYard/GraveYard";
+import { onShot } from "../../../helpers/functions";
+import { useAppDispatch } from "../../../Redux/hooks";
+import { useEffect } from "react";
+import { useAppSelector } from "../../../Redux/hooks";
+import * as yourActions from '../../../Redux/features/yourField';
 import classNames from "classnames";
+import './Field.scss';
 
 type Props = {
   battlefield: BattlefieldType,
-  size: number,
   isOpponent?: boolean,
+  isTurn: boolean,
+  setIsTurn: (value: boolean) => void,
+  isStart: boolean
 }
 
-export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false }) => {
+export const Field: React.FC<Props> = ({
+battlefield,
+isOpponent = false,
+isTurn,
+setIsTurn,
+isStart
+}) => {
   const isEachShipPlaced = battlefield.ships.every((ship) => isShipPlaced(ship));
 
-  const onShot = (point: CoordsType, battlefield: BattlefieldType): BattlefieldType => {
-    const copyField = {...battlefield};
-    let copyShips = [...copyField.ships];
-    let copySquares = [...copyField.squares];
+  const dispatch = useAppDispatch();
+  const { yourBattlefield } = useAppSelector(state => state.yourField);
 
-    copySquares = [...copySquares].map((column) => {
-      return column.map((cell) => {
-        if (cell.x === point.x && cell.y === point.y) {
-          cell = {...cell, isChecked: true};
-        }
+  const onShotHandle = (shotPoint: CoordsType, field: BattlefieldType, actions: any) => {
+    if (!isStart) {
+      return;
+    }
 
-        return cell;
-      })
-    })
+    if (isTurn) {
+      const newField: BattlefieldType = onShot(shotPoint, field);
+      dispatch(actions.update(newField));
+      setIsTurn(false);
+    }
+  }
 
-    copyShips = [...copyShips].map((ship) => {
-      let copyTowers = [...ship.towers];
+  useEffect(() => {
+    if (!isTurn) {
+      let isAllow = true;
 
-      copyTowers = [...copyTowers].map((tower) => {
-        if (tower.square?.x === point.x && tower.square.y === point.y) {
-          tower = {...tower, isChecked: true};
-        }
+      let shotPoint: CoordsType = {
+        x: 0,
+        y: 0,
+      }
 
-        return tower;
+      const isEachChecked = yourBattlefield.squares.every((column) => {
+        return column.every((sq) => sq.isChecked)
       });
 
-      const isShipDestroyed = copyTowers.every((tower) => tower.isChecked);
+      if (isEachChecked) {
+        return;
+      }
 
-      return {...ship, towers: copyTowers, destroyed: isShipDestroyed ? true : false};
-    })
+      while(isAllow && !isEachChecked) {
+        shotPoint = {
+          x: getRandomBetween(0, 9),
+          y: getRandomBetween(0, 9),
+        }
 
+        isAllow = isSquareChecked(shotPoint, yourBattlefield.squares);
+      }
 
-    copyField.squares = copySquares;
-    copyField.ships = copyShips;
-
-    return copyField;
-  }
+      setTimeout(() => {
+        const newField: BattlefieldType = onShot(shotPoint, yourBattlefield);
+        dispatch(yourActions.update(newField));
+        setIsTurn(true);
+      }, 1500)
+    }
+  }, [isTurn])
 
   return (
     <div className="field">
-      <FieldTitle title={isOpponent ? 'Opponent fleet' : 'Your fleet'} isOpponent={isOpponent} />
+      <FieldTitle
+        title={isOpponent ? 'Opponent fleet' : 'Your fleet'}
+        isOpponent={isOpponent}
+      />
 
       <div className="field__container">
         <div className="field__coords">
@@ -75,10 +102,6 @@ export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false }
           <ul
             className="field__list"
             data-field={isOpponent ? 'opponent' : 'you'}
-            style={{
-              gridTemplateColumns: `repeat(${size}, 1fr)`,
-              gridTemplateRows: `repeat(${size}, 1fr)`
-            }}
           >
             {battlefield.squares?.map((column: ColumnType) => {  
               return (
@@ -93,27 +116,28 @@ export const Field: React.FC<Props> = ({ battlefield, size, isOpponent = false }
             })}
 
             {!isOpponent && (
-              <ShipYard ships={battlefield.ships} isOpponent={isOpponent} />
+              <ShipYard
+                ships={battlefield.ships}
+                isOpponent={isOpponent}
+              />
             )}
-
-            {/* <ShipYard ships={battlefield.ships} isOpponent={isOpponent} /> */}
-
           </ul>
         </div>
       </div>
+  
       {!isOpponent && (
         <div className={classNames(
           "field__battle",
           {"field__battle--smooth": isEachShipPlaced}
         )}>
           <SelectCoords/>
-          <FireButton onShot={onShot}/>
+          <FireButton onShot={onShotHandle} />
         </div>
       )}
 
       {isOpponent && (
-        <GraveYard ships={battlefield.ships}/>
+        <GraveYard ships={battlefield.ships} />
       )}
     </div>
-  )
-}
+  );
+};

@@ -18,5 +18,4 @@ export function updateSeachParams(setSearchParams: URLSearchParams, params:
   });
     
   return newParams.toString();
-}
-   
+};

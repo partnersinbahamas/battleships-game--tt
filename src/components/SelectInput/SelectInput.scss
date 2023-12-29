@@ -1,13 +1,12 @@
 .select {
-    position: relative;
-    background-color: #F3F3F3;
-    box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: .1);
-    border-radius: 5px;
+  position: relative;
+  background-color: #F3F3F3;
+  box-shadow: 0 0 3px 1px rgba($color: #000, $alpha: .1);
+  border-radius: 5px;
 
   &__selected {
     margin: 0;
     padding: 10px 30px;
-
 
     &:hover {
       background-color: #eee;
@@ -15,23 +14,24 @@
   }
 
   &__list {
-    max-height: 100px;
-    overflow: scroll;
+    overflow-x: scroll;
     list-style: none;
     position: absolute;
+    max-height: 100px;
     bottom: -105px;
     left: 0;
     right: 0;
     border-radius: 5px;
     border: 1px solid #ddd;
+    background-color: #fff;
 
     &::-webkit-scrollbar {
-        display: none;
-      }
+      display: none;
+    }
   }
 
   &__item {
-    width: min-content;
+    box-sizing: border-box;
     padding: 5px 30px;
     border-radius: 5px;
 
@@ -39,4 +39,4 @@
       background-color: #eee;
     }
   }
-}
+};

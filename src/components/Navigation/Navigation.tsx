@@ -15,5 +15,5 @@ export const Navigation = () => {
 
       <PageNavLink key={aboutNav.id} nav={aboutNav} />
     </nav>
-  )
-}
+  );
+};

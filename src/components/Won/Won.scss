@@ -1,0 +1,55 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.won {
+  background-color: #fff;
+  padding: 10px 50px;
+  border-radius: 10px;
+  position: relative;
+
+  @include tablet() {
+    padding: 20px 70px;
+  }
+
+  &__title {
+    text-align: center;
+    font-family: $font-popins, sans-serif;
+    font-size: 16px;
+
+    @include tablet() {
+      font-size: 20px;
+    }
+  }
+
+  &__cup {
+    width: 70px;
+    height: 70px;
+    background-image: url('../../images/trophy.png');
+    background-repeat: no-repeat;
+    background-size: 70px;
+    margin: 0 auto;
+
+    @include tablet() {
+      width: 100px;
+      height: 100px;
+      background-size: 100px;
+    }
+  }
+
+  &__coin {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../../images/won.png');
+    background-repeat: no-repeat;
+    background-size: 30px;
+
+    @include tablet() {
+      width: 40px;
+      height: 40px;
+      background-size: 40px;
+    }
+  }
+};

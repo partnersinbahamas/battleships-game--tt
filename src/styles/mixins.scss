@@ -8,4 +8,10 @@
   @media (min-width: 1280px) {
     @content
   }
-}
+};
+
+@mixin mobile() {
+  @media (min-width: 320px) {
+    @content;
+  }
+};

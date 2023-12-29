@@ -1,73 +1,88 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import * as yourFieldActions from '../../Redux/features/yourField';
 import * as opponentFieldActions from '../../Redux/features/opponentField';
 import { Field } from './Field/Field';
-import { onPlaceShip, randomShipPlace } from '../../helpers/functions';
-import { BattlefieldType } from '../../types/battlefield';
-import { ShipType } from '../../types/ship';
 import { Controls } from '../../components/Controls/Controls';
+import { Turn } from '../../components/Turn/Turn';
+import { Modal } from '../../components/Modal/Modal';
+import { Won } from '../../components/Won/Won';
+import { Lose } from '../../components/Lose/Lose';
 import './Game.scss';
 
 export const Game = () => {
-  const size: number = 10;
+  const [isTurn, setIsTurn] = useState<boolean>(true);
+  const [isStart, setIsStart] = useState<boolean>(false);
+
+  const [isModal, setIsModal] = useState<boolean>(false);
+
+  const [isOpponentWon, setIsOpponentWon] = useState<boolean>(false);
+  const [isYouWon, setIsYouWon] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const { yourBattlefield } = useAppSelector(state => state.yourField);
   const { opponentBattlefield } = useAppSelector(state => state.opponentField);
-
-  // const opponentfield = document.querySelector<Element>('[data-field="opponent"]');
-
-  // function placeShipAuto(
-  //   dispatchField: BattlefieldType, 
-  //   actions: any,
-  //   field: Element
-  // ) {
-  //   let copyShips: ShipType[] = [...dispatchField.ships];
-
-  //   for (let i = 0; i < copyShips.length; i++) {
-  //     const ship = copyShips[i];
-
-  //     copyShips = [...copyShips].map((el) => {
-  //       if (el.id === ship.id) {
-  //         el = randomShipPlace(onPlaceShip(copyShips), ship, field!, true);
-  //       }
-
-  //       return el;
-  //     })
-
-  //     dispatch(
-  //       actions.update({
-  //         ...dispatchField,
-  //         ships: copyShips,
-  //         squares: onPlaceShip(copyShips)})
-  //     )
-  //   };
-
-  //   return copyShips;
-  // }
-  
+ 
   useEffect(() => {
-    dispatch(yourFieldActions.init(size));
-    dispatch(opponentFieldActions.init(size));
+    dispatch(yourFieldActions.init(10));
+    dispatch(opponentFieldActions.init(10));
   }, []);
+
+  useEffect(() => {
+    if (isStart) {
+      const isYouLose = yourBattlefield.ships.every((ship) => ship.destroyed);
+      const isOpponentLose = opponentBattlefield.ships.every((ship) => ship.destroyed);
+
+      setIsOpponentWon(isYouLose);
+      setIsYouWon(isOpponentLose);
+
+      if (isOpponentWon || isYouWon) {
+        setIsModal(true);
+      }
+    }
+  }, [yourBattlefield, opponentBattlefield])
+
+  useEffect(() => {
+    if (!isStart) {
+      setIsOpponentWon(false);
+      setIsYouWon(false);
+    }
+  }, [isStart])
 
   return (
     <section className="game">
-      <Field
-        battlefield={yourBattlefield}
-        size={size}
-      />
+      {isYouWon && isModal && (
+        <Modal setModal={setIsModal}>
+          <Won/>
+        </Modal>
+      )}
 
-      {/* <button onClick={() => placeShipAuto(opponentBattlefield, opponentFieldActions, opponentfield!)}>+</button> */}
+      {isOpponentWon && isModal &&  (
+        <Modal setModal={setIsModal}>
+          <Lose />
+        </Modal>
+      )}
 
-      <Controls />
+      <Turn isTurn={isTurn}/>
 
-      <Field
-        battlefield={opponentBattlefield}
-        size={size}
-        isOpponent={true}
-      />
+      <div className="game__container">
+        <Field
+          battlefield={yourBattlefield}
+          isTurn={isTurn}
+          setIsTurn={setIsTurn}
+          isStart={isStart}
+        />
+
+        <Controls setIsStart={setIsStart} isStart={isStart} />
+
+        <Field
+          battlefield={opponentBattlefield}
+          isOpponent={true}
+          isTurn={isTurn}
+          setIsTurn={setIsTurn}
+          isStart={isStart}
+        />
+      </div>
     </section>
-  )
-}
+  );
+};

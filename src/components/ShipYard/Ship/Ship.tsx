@@ -4,8 +4,8 @@ import { isCoordFree, isUnderPoint, onPlaceShip, setTowerCoords } from '../../..
 import { useAppDispatch } from '../../../Redux/hooks';
 import { useAppSelector } from '../../../Redux/hooks';
 import * as yourFieldActions from '../../../Redux/features/yourField';
-import classNames from 'classnames';
 import { Coords } from '../../../types/squarePoint';
+import classNames from 'classnames';
 import './Ship.scss';
 
 type Props = {
@@ -20,19 +20,18 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
   const shipRef = useRef<HTMLLIElement | null>(null);
   const yourfield = document.querySelector<Element>('[data-field="you"]');
   const rootRect: DOMRect = yourfield?.getBoundingClientRect()!;
-  const squareEl = document.querySelector('.square');
-  const squareRect = squareEl?.getBoundingClientRect();
+  const squareEl = document.querySelector<Element>('.square');
+  const squareRect: DOMRect = squareEl?.getBoundingClientRect()!;
 
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
-  console.log(squareEl, squareRect);
-
   const dispatch = useAppDispatch();
   const { yourBattlefield: field } = useAppSelector(state => state.yourField);
+
   const handleMouseDown = (e: React.MouseEvent): void => {
-    // if (isOpponent) {
-    //   return;
-    // }
+    if (isOpponent) {
+      return;
+    }
 
     setIsDragging(true);
     
@@ -51,9 +50,9 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
   };
 
   const handleMouseUp = () => {
-    // if (isOpponent) {
-    //   return;
-    // }
+    if (isOpponent) {
+      return;
+    }
   
     setIsDragging(false);
 
@@ -77,7 +76,6 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
         const cells = document.querySelectorAll('.square');
         const cell: any = Array.from(cells).find((cell) => isUnderPoint(point, cell));
 
-
         if (cell) {
           const { x, y } = cell.dataset;
           const cellReact = cell.getBoundingClientRect();
@@ -95,12 +93,12 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
               x: pointX!,
               y: pointY!,
             }
+          
             newTowers = setTowerCoords(field.squares, shipItem, coordsPoint);
           }
         }
 
         setCoords({x: newX, y: newY});
-        console.log(newTowers)
 
         shipItem = { ...shipItem,
           x: newX,
@@ -109,8 +107,6 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
           coordY: pointY,
           towers: newTowers,
         };
-
-        console.log(shipItem);
       }
 
       return shipItem;
@@ -169,8 +165,6 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
     };
   }, [isDragging]);
 
-  console.log(isDragging);
-
   return (
     <li
       ref={shipRef}
@@ -183,21 +177,21 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
         left: `${coords.x}px`,
         top: `${coords.y}px`,
       }}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onWheel={onWheel}
     >
       <ul
         className="ship__list"
         style={{
           flexDirection: ship.direction,
         }}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onWheel={onWheel}
       >
         {ship.towers.map((tower) => (
           <li
             id={`ship-${ship.id}-tower-${tower}-${isOpponent ? 'opponent' : 'you'}`}
             key={tower.id}
-            className={`ship__tower ship_tower-${ship.id}`}
+            className={`ship__tower`}
             style={{ width: `${squareRect?.width}px`, height: `${squareRect?.width}px` }}
           >
             <div

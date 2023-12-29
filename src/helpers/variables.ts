@@ -1,6 +1,11 @@
 import { Nav } from "../types/nav";
 import { ShipType } from "../types/ship";
 
+const screenWidth = window.innerWidth;
+
+const isTablet = screenWidth >= 640;
+const isDesktop = screenWidth >= 1280;
+
 export const navigations: Nav[] = [
   {
     id: 1,
@@ -49,9 +54,9 @@ export const ships: ShipType[] = [
     id: 1,
     size: 4,
     x: 0,
-    y: 390,
+    y: isDesktop ? 390 : isTablet ? 350 : 260,
     defX: 0,
-    defY: 390,
+    defY: isDesktop ? 390 : isTablet ? 350 : 260,
     coordX: null,
     coordY: null,
     name: 'Destroyer',
@@ -68,10 +73,10 @@ export const ships: ShipType[] = [
   {
     id: 2,
     size: 3,
-    x: 237,
-    y: 390,
-    defX: 237,
-    defY: 390,
+    x: isDesktop ? 237 : isTablet ? 218 : 165,
+    y: isDesktop ? 390 : isTablet ? 350 : 260,
+    defX: isDesktop ? 237 : isTablet ? 218 : 165,
+    defY: isDesktop ? 390 : isTablet ? 350 : 260,
     coordX: null,
     coordY: null,
     name: 'Submarine',
@@ -87,10 +92,10 @@ export const ships: ShipType[] = [
   {
     id: 3,
     size: 2,
-    x: 155,
-    y: 390,
-    defX: 155,
-    defY: 390,
+    x: isDesktop ? 155 : isTablet ? 140 : 105,
+    y: isDesktop ? 390 : isTablet ? 350 : 260,
+    defX: isDesktop ? 155 : isTablet ? 140 : 105,
+    defY: isDesktop ? 390 : isTablet ? 350 : 260,
     coordX: null,
     coordY: null,
     name: 'Cruiser',
@@ -105,10 +110,10 @@ export const ships: ShipType[] = [
   {
     id: 4,
     size: 5,
-    x: 155,
-    y: 435,
-    defX: 155,
-    defY: 435,
+    x: isDesktop ? 155 : isTablet ? 140 : 105,
+    y: isDesktop ? 435 : isTablet ? 390 : 295,
+    defX: isDesktop ? 155 : isTablet ? 140 : 105,
+    defY: isDesktop ? 435 : isTablet ? 390 : 295,
     coordX: null,
     coordY: null,
     name: 'Battleship',
@@ -127,9 +132,9 @@ export const ships: ShipType[] = [
     id: 5,
     size: 4,
     x: 0,
-    y: 435,
+    y: isDesktop ? 435 : isTablet ? 390 : 295,
     defX: 0,
-    defY: 435,
+    defY: isDesktop ? 435 : isTablet ? 390 : 295,
     coordX: null,
     coordY: null,
     name: 'Destroyer',

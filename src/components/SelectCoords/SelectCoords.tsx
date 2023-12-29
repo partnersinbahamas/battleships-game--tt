@@ -1,11 +1,10 @@
-import { useParams, useSearchParams } from "react-router-dom";
-import { columnCoords, rowCoords } from "../../helpers/variables";
+import { useSearchParams } from "react-router-dom";
+import { columnCoords } from "../../helpers/variables";
 import { SelectInput } from "../SelectInput/SelectInpit";
 import { updateSeachParams } from "../../hooks/UpdateSearchParams";
 import './SelectCoords.scss';
 
 export const SelectCoords = () => {
-  const rowCoordsArray = Object.values(rowCoords);
   const columnCoordsArray = Object.values(columnCoords);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -16,7 +15,6 @@ export const SelectCoords = () => {
   const onCoordYSelect = (coord: number) => {
     setSearchParams((updateSeachParams(searchParams, {y: String(coord)})));
   }
-
 
   return (
     <div className="selectCoords">
@@ -30,5 +28,5 @@ export const SelectCoords = () => {
         <SelectInput coords={columnCoordsArray} onSelect={onCoordYSelect}/>
       </div>
     </div>
-  )
-}
+  );
+};

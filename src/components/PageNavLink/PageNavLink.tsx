@@ -19,5 +19,5 @@ export const PageNavLink: React.FC<Props> = ({ nav }) => {
     >
       {nav.title}
     </NavLink>
-  )
-}
+  );
+};

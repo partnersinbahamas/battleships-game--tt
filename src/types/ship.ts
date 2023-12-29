@@ -4,7 +4,7 @@ export type ShipTower = {
   id: number,
   isChecked: boolean,
   square: SquarePoint | null,
-}
+};
 
 export type ShipType = Coords & {
   id: number,
@@ -17,4 +17,4 @@ export type ShipType = Coords & {
   coordX: number | null,
   coordY: number | null,
   towers: ShipTower[],
-}
+};

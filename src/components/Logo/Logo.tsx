@@ -1,6 +1,5 @@
 import './Logo.scss';
 
-
 export const Logo = () => {
   return (
     <section className="logo">
@@ -15,5 +14,5 @@ export const Logo = () => {
 
       <h1 className="logo__title">BATTLESHIPS</h1>
     </section>
-  )
-}
+  );
+};
