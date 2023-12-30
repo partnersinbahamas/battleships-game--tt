@@ -176,6 +176,7 @@ export const Ship: React.FC<Props> = ({ ship, isOpponent }) => {
       style={{
         left: `${coords.x}px`,
         top: `${coords.y}px`,
+        display: `${isOpponent && !ship.destroyed ? 'none' : 'block'}`
       }}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}

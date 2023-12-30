@@ -14,8 +14,6 @@ export const Turn: React.FC<Props> = ({ isTurn }) => {
         {"turn--right": !isTurn},
       )}
     >
-      <span className="turn__title">Turn</span>
-
       <i className="turn__arrow bx bxs-down-arrow"/>
     </div>
   );

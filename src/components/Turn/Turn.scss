@@ -2,6 +2,7 @@
 @import '../../styles/mixins.scss';
 
 .turn {
+    width: min-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,6 +31,7 @@
     position: absolute;
     left: -40px;
     transform: rotate(-90deg) translateX(440%);
+    transition: .5s;
 
     @include tablet() {
       transform: rotate(-90deg) translateX(350%);
@@ -40,21 +42,6 @@
       position: static;
       left: 0;
       transform: rotate(0) translateX(-330%);
-    }
-  }
-
-  &__title {
-    letter-spacing: 2px;
-    font-size: 12px;
-
-    @include tablet() {
-      letter-spacing: 3px;
-      font-size: 14px;
-    }
-
-    @include tablet() {
-      letter-spacing: 3px;
-      font-size: 16px;
     }
   }
 

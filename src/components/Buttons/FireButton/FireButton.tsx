@@ -15,6 +15,7 @@ type Props = {
 export const FireButton: React.FC<Props> = ({ onShot }) => {
   const { opponentBattlefield } = useAppSelector(state => state.opponentField);
   const [click, setClick] = useState<boolean>(false);
+  const [shot, setShot] = useState<boolean>(false);
   const [searchParams] = useSearchParams();
 
   const x = searchParams.get('x') || 0;
@@ -22,6 +23,7 @@ export const FireButton: React.FC<Props> = ({ onShot }) => {
 
   const onClick = () => {
     setClick(false);
+    setShot(true);
 
     const shotPoint: Coords = {
       x: +x,
@@ -29,6 +31,10 @@ export const FireButton: React.FC<Props> = ({ onShot }) => {
     }
 
     onShot(shotPoint, opponentBattlefield, opponentActions);
+
+    setTimeout(() => {
+        setShot(false);
+    }, 300)
   }
   
   return (
@@ -37,17 +43,20 @@ export const FireButton: React.FC<Props> = ({ onShot }) => {
       onMouseDown={() => setClick(true)}
       onMouseUp={() => onClick()}
     >
-      <button className="fireButton__button" type="button"/>
+      <button className="fireButton__button" type="button" />
+      
       <div
         className={classNames(
           "fireButton__fire",
           { "fireButton__fire-active": click },
+          { "fireButton__fire-shot": shot },
         )}
       >
         <div
           className={classNames(
             "fireButton__shot",
-            { "fireButton__shot--scale": click}
+          { "fireButton__shot--shot": shot },
+          { "fireButton__shot--scale": click},
           )}
         />
       </div>
