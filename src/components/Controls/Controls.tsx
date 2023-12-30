@@ -71,7 +71,6 @@ export const Controls: React.FC<Props> = ({ setIsStart, isStart }) => {
       > 
         Start
       </button>
-
       <button
         className={classNames(
           "controls__button",

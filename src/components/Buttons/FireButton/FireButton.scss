@@ -24,7 +24,13 @@
     transition: .3s;
 
     &-active {
-      width: 100%;
+      width: 50%;
+      background-color: orange;
+    }
+
+    &-shot {
+      width: 90%;
+      transition: .1s;
       background-color: $color-red;
     }
   }
@@ -43,6 +49,12 @@
 
     &--scale {
       transform: scale(2);
+      top: 1;
+    }
+
+    &--shot {
+      transform: scale(3);
+      top: -1px;
     }
   }
 };

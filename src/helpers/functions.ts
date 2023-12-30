@@ -189,8 +189,6 @@ export function randomShipPlace(squares: ColumnType[], ship: ShipType, rootEleme
   while(!isFree) {
     x = getRandomBetween(0, 9);
     y = getRandomBetween(0, 9);
-    let newTowers: ShipTower[] = []
-
 
     cell = Array.from(cells).find((cell: any) => {
       const cellDatas = cell.dataset;

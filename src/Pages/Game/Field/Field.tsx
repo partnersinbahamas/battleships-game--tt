@@ -115,12 +115,17 @@ isStart
               )
             })}
 
-            {!isOpponent && (
+            {/* {!isOpponent && (
               <ShipYard
                 ships={battlefield.ships}
                 isOpponent={isOpponent}
               />
-            )}
+            )} */}
+
+              <ShipYard
+                ships={battlefield.ships}
+                isOpponent={isOpponent}
+              />
           </ul>
         </div>
       </div>
